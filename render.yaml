@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: myntra-ecommerce
+    env: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: mongodb
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: NEXT_PUBLIC_API_URL
+        value: https://myntra-ecommerce.onrender.com/api
